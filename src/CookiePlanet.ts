@@ -1,17 +1,24 @@
 import {CookieClickerMod} from "./globals";
+import {Config} from "./menus/config";
+import patchUpdateMenu from "./menus/patchUpdateMenu";
+import {patchSpells} from "./patches/patchSpells";
 
 const CookiePlanet = {
     init: function() {
-        console.log("a!")
-        console.log(Game.Objects["Wizard tower"]);
-        setTimeout(() => {
-            if(!Game.Objects["Wizard tower"].minigameLoaded) return;
-            Game.Objects["Wizard tower"].minigame.getFailChance = (_: string) => 0;
-        }, 2000)
+        document.addEventListener("keydown", (e) => {
+            if(e.key === "F8") {
+                debugger;
+            }
+        })
+
+        Config.initConfig();
+
+        patchUpdateMenu();
+        patchSpells();
     },
 
     save: function() {
-        return "asd";
+        return "";
     },
 
     load: function(data) {
