@@ -1,0 +1,16 @@
+{
+    "name": "CookiePlanet",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "node ./build.mjs"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "esbuild": "^0.24.0",
+        "typescript": "^5.6.2"
+    }
+}
