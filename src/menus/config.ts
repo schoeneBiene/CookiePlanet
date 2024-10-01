@@ -17,9 +17,7 @@ export class Config {
     }
 
     public static initConfig() {
-        console.log("AAAAA")
         let conf = localStorage.getItem("CookiePlanet");
-        console.log(conf);
 
         if(!conf) {
             localStorage.setItem("CookiePlanet", JSON.stringify(this.defaults()));

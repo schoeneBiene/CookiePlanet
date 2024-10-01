@@ -21,9 +21,7 @@ const CookiePlanet = {
         return "";
     },
 
-    load: function(data) {
-        console.log("Loading data: " + data)
-    }
+    load: function(data) {}
 } satisfies CookieClickerMod;
 
 export default CookiePlanet;
