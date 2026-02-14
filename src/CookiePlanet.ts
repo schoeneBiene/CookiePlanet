@@ -1,6 +1,7 @@
 import { CookieClickerMod } from "./globals";
 import { Config } from "./menus/config";
 import patchUpdateMenu from "./menus/patchUpdateMenu";
+import { updateAutoClicker } from "./modules/autoClicker";
 import { patchShimmer } from "./patches/patchShimmer";
 import { patchSpells } from "./patches/patchSpells";
 import { patchStockMarket } from "./patches/patchStockMarket";
@@ -19,6 +20,8 @@ const CookiePlanet = {
     patchSpells();
     patchStockMarket();
     patchShimmer();
+
+    updateAutoClicker();
   },
 
   save: function () {

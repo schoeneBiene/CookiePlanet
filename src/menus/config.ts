@@ -1,3 +1,4 @@
+import { updateAutoClicker } from "../modules/autoClicker";
 import { Option, constructComponent } from "./ui/configComponents";
 import heading from "./ui/heading";
 
@@ -61,6 +62,12 @@ export const configOptions = {
     type: "toggle",
     description: "Automatically clicks all shimmers that appear on screen",
     default: false,
+  },
+  autoClicker: {
+    type: "toggle",
+    description: "Automatically clicks the big cookie",
+    default: false,
+    onChange: updateAutoClicker,
   },
 } satisfies {
   [key: string]: Option;

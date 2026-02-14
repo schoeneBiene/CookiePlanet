@@ -4,12 +4,11 @@ export type Option = {
   type: "toggle";
   description?: string;
   default: any;
+  onChange?: () => void;
 };
 
 function camelToSpaces(text: string) {
   const words = text.match(/[A-Za-z][a-z]*/g) || [];
-
-  console.log(words);
 
   return words
     .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
@@ -36,6 +35,10 @@ function constructSwitchComponent(name: string, option: Option) {
 
     Config.setConfigItem(name, !value);
     Config.saveConfig();
+
+    if (option.onChange) {
+      option.onChange();
+    }
 
     Game.UpdateMenu();
   });

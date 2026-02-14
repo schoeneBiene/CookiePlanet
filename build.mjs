@@ -7,5 +7,5 @@ const ctx = await esbuild.build({
   outfile: "./dist/CookiePlanet.js",
   bundle: true,
   sourcemap: IS_DEV ? "inline" : false,
-  minify: !IS_DEV
+  minify: !IS_DEV,
 });
