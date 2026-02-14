@@ -1,34 +1,34 @@
 export function patchStockMarket() {
-    if(Game.Objects.Bank.minigameLoaded) {
-        _patchStockMarket();
-        
-        return;
-    };
+  if (Game.Objects.Bank.minigameLoaded) {
+    _patchStockMarket();
 
-    Game.Objects.Bank = new Proxy(Game.Objects.Bank, {
-        set(target, property, value) {
-            target[property] = value;
+    return;
+  }
 
-            if(property === "minigameLoaded" && value === true) {
-                setTimeout(() => {
-                    _patchStockMarket();
-                }, 1000)
-            }
+  Game.Objects.Bank = new Proxy(Game.Objects.Bank, {
+    set(target, property, value) {
+      target[property] = value;
 
-            return true;
-        }
-    })
+      if (property === "minigameLoaded" && value === true) {
+        setTimeout(() => {
+          _patchStockMarket();
+        }, 1000);
+      }
+
+      return true;
+    },
+  });
 }
 
 function _patchStockMarket() {
-    const button = document.createElement("div");
-    button.className = "bankButton bankButtonBuy"
-    button.textContent = "Tick";
+  const button = document.createElement("div");
+  button.className = "bankButton bankButtonBuy";
+  button.textContent = "Tick";
 
-    button.addEventListener("click", () => {
-        Game.Objects.Bank.minigame.tickT = Game.Objects.Bank.minigame.secondsPerTick * 30;
-    })
+  button.addEventListener("click", () => {
+    Game.Objects.Bank.minigame.tickT =
+      Game.Objects.Bank.minigame.secondsPerTick * 30;
+  });
 
-    l("bankBrokers").parentNode?.appendChild(button);
+  l("bankBrokers").parentNode?.appendChild(button);
 }
-

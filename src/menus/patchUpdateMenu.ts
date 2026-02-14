@@ -1,13 +1,13 @@
 import { inConfig } from "./config";
 
 export default function patchUpdateMenu() {
-    const originalUpdateMenu = Game.UpdateMenu;
+  const originalUpdateMenu = Game.UpdateMenu;
 
-    Game.UpdateMenu = () => {
-        originalUpdateMenu();
+  Game.UpdateMenu = () => {
+    originalUpdateMenu();
 
-        if(Game.onMenu === "prefs") {
-            inConfig();
-        }
+    if (Game.onMenu === "prefs") {
+      inConfig();
     }
+  };
 }

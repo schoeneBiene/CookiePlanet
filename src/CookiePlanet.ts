@@ -1,31 +1,31 @@
-import {CookieClickerMod} from "./globals";
-import {Config} from "./menus/config";
+import { CookieClickerMod } from "./globals";
+import { Config } from "./menus/config";
 import patchUpdateMenu from "./menus/patchUpdateMenu";
 import { patchShimmer } from "./patches/patchShimmer";
-import {patchSpells} from "./patches/patchSpells";
-import {patchStockMarket} from "./patches/patchStockMarket";
+import { patchSpells } from "./patches/patchSpells";
+import { patchStockMarket } from "./patches/patchStockMarket";
 
 const CookiePlanet = {
-    init: function() {
-        document.addEventListener("keydown", (e) => {
-            if(e.key === "F8") {
-                debugger;
-            }
-        })
+  init: function () {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "F8") {
+        debugger;
+      }
+    });
 
-        Config.initConfig();
+    Config.initConfig();
 
-        patchUpdateMenu();
-        patchSpells();
-        patchStockMarket();
-        patchShimmer();
-    },
+    patchUpdateMenu();
+    patchSpells();
+    patchStockMarket();
+    patchShimmer();
+  },
 
-    save: function() {
-        return "";
-    },
+  save: function () {
+    return "";
+  },
 
-    load: function(data) {}
+  load: function (data) {},
 } satisfies CookieClickerMod;
 
 export default CookiePlanet;

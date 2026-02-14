@@ -1,90 +1,90 @@
-import {Option, constructComponent} from "./ui/configComponents";
+import { Option, constructComponent } from "./ui/configComponents";
 import heading from "./ui/heading";
 
 export class Config {
-    private static config: { [key: string]: any } = {};
+  private static config: { [key: string]: any } = {};
 
-    private static defaults(): { [key: string]: any } {
-        const conf: { [key: string]: any } = {};
+  private static defaults(): { [key: string]: any } {
+    const conf: { [key: string]: any } = {};
 
-        for(const [key, value] of Object.entries(configOptions)) {
-            conf[key] = value.default;
-        }
-
-        console.log(conf);
-
-        return conf;
+    for (const [key, value] of Object.entries(configOptions)) {
+      conf[key] = value.default;
     }
 
-    public static initConfig() {
-        let conf = localStorage.getItem("CookiePlanet");
+    console.log(conf);
 
-        if(!conf) {
-            localStorage.setItem("CookiePlanet", JSON.stringify(this.defaults()));
-        }
+    return conf;
+  }
 
-        conf = localStorage.getItem("CookiePlanet");
+  public static initConfig() {
+    let conf = localStorage.getItem("CookiePlanet");
 
-        if(!conf) {
-            throw new Error("Failed to load config data!");
-        }
-
-        Config.config = JSON.parse(conf);
-
-        Object.entries(this.defaults()).forEach(([k, v]) => {
-            if(!Config.config[k]) {
-              Config.config[k] = v;
-            }
-        });
+    if (!conf) {
+      localStorage.setItem("CookiePlanet", JSON.stringify(this.defaults()));
     }
 
-    public static setConfigItem(item: string, newValue: any) {
-        Config.config[item] = newValue;
+    conf = localStorage.getItem("CookiePlanet");
+
+    if (!conf) {
+      throw new Error("Failed to load config data!");
     }
 
-    public static saveConfig() {
-        localStorage.setItem("CookiePlanet", JSON.stringify(Config.config));
-    }
-    
-    public static getConfig() {
-        return Config.config;
-    }
+    Config.config = JSON.parse(conf);
+
+    Object.entries(this.defaults()).forEach(([k, v]) => {
+      if (!Config.config[k]) {
+        Config.config[k] = v;
+      }
+    });
+  }
+
+  public static setConfigItem(item: string, newValue: any) {
+    Config.config[item] = newValue;
+  }
+
+  public static saveConfig() {
+    localStorage.setItem("CookiePlanet", JSON.stringify(Config.config));
+  }
+
+  public static getConfig() {
+    return Config.config;
+  }
 }
 
 export const configOptions = {
-    noBackfire: {
-        type: "toggle",
-        description: "When on, makes spells not backfire",
-        default: false
-    },
-    autoClickShimmers: {
-        type: "toggle",
-        description: "Automatically clicks all shimmers that appear on screen",
-        default: false
-    }
+  noBackfire: {
+    type: "toggle",
+    description: "When on, makes spells not backfire",
+    default: false,
+  },
+  autoClickShimmers: {
+    type: "toggle",
+    description: "Automatically clicks all shimmers that appear on screen",
+    default: false,
+  },
 } satisfies {
-    [key: string]: Option;
+  [key: string]: Option;
 };
 
 export function inConfig() {
-    const block = document.createElement("div");
-    block.className = "block";
-    block.setAttribute("style", "padding:0px;margin:8px 4px;");
-    
-    const subsection = document.createElement("div");
-    subsection.className = "subsection";
-    subsection.setAttribute("style", "padding:0px;")
+  const block = document.createElement("div");
+  block.className = "block";
+  block.setAttribute("style", "padding:0px;margin:8px 4px;");
 
-    subsection.appendChild(heading("CookiePlanet"))
+  const subsection = document.createElement("div");
+  subsection.className = "subsection";
+  subsection.setAttribute("style", "padding:0px;");
 
-    const listing = document.createElement("div");
-    listing.className = "listing";
+  subsection.appendChild(heading("CookiePlanet"));
 
-    for (const [key, value] of Object.entries(configOptions)) {
-        listing.append(constructComponent(key, value));
-    }
+  const listing = document.createElement("div");
+  listing.className = "listing";
 
-    subsection.appendChild(listing);
-    block.append(subsection);
-    l("menu").childNodes[4].before(block);
+  for (const [key, value] of Object.entries(configOptions)) {
+    listing.append(constructComponent(key, value));
+  }
+
+  subsection.appendChild(listing);
+  block.append(subsection);
+  l("menu").childNodes[4].before(block);
 }
