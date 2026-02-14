@@ -4,7 +4,7 @@ import heading from "./ui/heading";
 export class Config {
     private static config: { [key: string]: any } = {};
 
-    private static defaults() {
+    private static defaults(): { [key: string]: any } {
         const conf: { [key: string]: any } = {};
 
         for(const [key, value] of Object.entries(configOptions)) {
@@ -30,6 +30,12 @@ export class Config {
         }
 
         Config.config = JSON.parse(conf);
+
+        Object.entries(this.defaults()).forEach(([k, v]) => {
+            if(!Config.config[k]) {
+              Config.config[k] = v;
+            }
+        });
     }
 
     public static setConfigItem(item: string, newValue: any) {
@@ -49,6 +55,11 @@ export const configOptions = {
     noBackfire: {
         type: "toggle",
         description: "When on, makes spells not backfire",
+        default: false
+    },
+    autoClickShimmers: {
+        type: "toggle",
+        description: "Automatically clicks all shimmers that appear on screen",
         default: false
     }
 } satisfies {
